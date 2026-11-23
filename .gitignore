@@ -151,6 +151,9 @@ activemq-data/
 
 # Environments
 .env
+.env.local
+.env.*.local
+.env.*.example
 .envrc
 .venv
 env/
@@ -158,6 +161,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.venv.bak/
 
 # Conda environments
 conda-meta/
@@ -221,3 +225,149 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# ============================================================================
+# IDE & Editor Settings
+# ============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+*.sublime-workspace
+*.sublime-project
+
+# ============================================================================
+# Sensitive Files & Credentials
+# ============================================================================
+secrets.json
+*.pem
+*.key
+*.pfx
+*.p12
+credentials.json
+service-account-key.json
+oauth_credentials.json
+aws_credentials
+
+# ============================================================================
+# Database & Cache
+# ============================================================================
+*.db
+*.sqlite
+*.sqlite3
+dump.rdb
+.redis/
+postgres/
+pgdata/
+elasticsearch/
+
+# ============================================================================
+# Project-Specific
+# ============================================================================
+# Local development overrides
+local_settings.py
+settings.local.py
+
+# Alembic
+alembic/versions/*.py
+!alembic/versions/versions_placeholder.txt
+
+# API Documentation
+docs/generated/
+openapi.json
+
+# Logs
+logs/
+*.log
+*.log.*
+
+# OS-Specific
+.DS_Store
+.AppleDouble
+.LSOverride
+*.cab
+*.msi
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# IDE Specific
+.vscode/settings.json
+.vscode/launch.json
+.vscode/extensions.json
+.vscode/.history/
+.idea/
+.idea/inspectionProfiles/
+*.iml
+*.iws
+*.ipr
+
+# Pycharm
+*.pyc
+.idea/
+
+# macOS
+.AppleDouble
+.LSOverride
+._*
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+desktop.ini
+$RECYCLE.BIN/
+ehthumbs.db
+thumbs.db
+
+# ============================================================================
+# Testing & Coverage
+# ============================================================================
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# ============================================================================
+# Build Artifacts
+# ============================================================================
+build/
+dist/
+*.egg-info/
+*.whl
+.eggs/
+
+# ============================================================================
+# Temporary Files
+# ============================================================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+*~
+.#*
+\#*\#
+
+# ============================================================================
+# Node/Frontend (if applicable)
+# ============================================================================
+node_modules/
+npm-debug.log
+yarn-error.log
+.next/
+.nuxt/
+dist/
+
+# ============================================================================
+# Docker
+# ============================================================================
+docker-compose.local.yml
+.docker/
+docker-data/
