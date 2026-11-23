@@ -50,7 +50,7 @@ class TokenService(BaseService[OneTimeToken]):
             token_type=token_type.value,
             email=email,
             expires_at=datetime.now(UTC) + timedelta(minutes=ttl_minutes),
-            metadata=metadata or {},
+            context=metadata or {},
         )
 
         logger.info(

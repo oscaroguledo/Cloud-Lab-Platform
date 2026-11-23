@@ -5,7 +5,7 @@ from typing import Protocol
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-# kind -> parameters (besides ``to`` and ``language``)
+# kind -> parameters (besides ``to``)
 ACCOUNT_CREATED = "account_created"  # first_name, organization_name
 VERIFY_EMAIL = "verify_email"  # first_name, code
 RESET_PASSWORD = "reset_password"  # first_name, token
@@ -22,7 +22,7 @@ ORGANIZATION_CLOSED = "organization_closed"  # first_name, organization_name
 
 class Notifier(Protocol):
     async def stage(
-        self, db: AsyncSession, kind: str, *, to: str, language: str, **params: object
+        self, db: AsyncSession, kind: str, *, to: str, **params: object
     ) -> object: ...
 
     async def deliver_due(self) -> int: ...
@@ -32,4 +32,4 @@ class Notify(Protocol):
     """Add a notification to the caller's open transaction, so it is sent only if the change that
     caused it commits. Call it before the commit; it goes out right after the response."""
 
-    async def send(self, kind: str, *, to: str, language: str, **params: object) -> None: ...
+    async def send(self, kind: str, *, to: str, **params: object) -> None: ...

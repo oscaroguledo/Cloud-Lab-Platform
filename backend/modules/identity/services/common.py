@@ -9,12 +9,12 @@ from sqlalchemy import distinct, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.core.api.dependencies import RequestContext
-from app.core.config import Settings
-from app.modules.identity import errors
-from app.modules.identity.models import AccountStatus, Organization, Role, RolePermission, User
-from app.modules.identity.notifier import NEW_SIGN_IN, ORGANIZATION_CLOSED, Notify
-from app.modules.identity.scopes import Scopes
+from core.api.dependencies import RequestContext
+from core.config import Settings
+from modules.identity import errors
+from modules.identity.models import AccountStatus, Organization, Role, RolePermission, User
+from modules.identity.notifier import NEW_SIGN_IN, ORGANIZATION_CLOSED, Notify
+from modules.identity.scopes import Scopes
 
 
 def role_scopes_loader():
@@ -204,10 +204,8 @@ def apply_profile(user: User, data) -> list[str]:
 
 
 async def alert(notify: Notify, kind: str, user: User, **params: object) -> None:
-    """Email a user about a change to their account's security, in their own language."""
-    await notify.send(
-        kind, to=user.email, language=user.language, first_name=user.first_name, **params
-    )
+    """Email a user about a change to their account's security."""
+    await notify.send(kind, to=user.email, first_name=user.first_name, **params)
 
 
 async def flag_new_device(
@@ -229,12 +227,12 @@ async def flag_new_device(
 async def tell_members_closed(db: AsyncSession, notify: Notify, organization: Organization) -> None:
     """Email every member that their organisation was closed (the owner who closed it too)."""
     members = await db.execute(
-        select(User.email, User.first_name, User.language).where(
+        select(User.email, User.first_name).where(
             User.organization_id == organization.id
         )
     )
-    for email, first_name, language in members:
+    for email, first_name in members:
         await notify.send(
-            ORGANIZATION_CLOSED, to=email, language=language, first_name=first_name,
+            ORGANIZATION_CLOSED, to=email, first_name=first_name,
             organization_name=organization.name,
         )  # fmt: skip

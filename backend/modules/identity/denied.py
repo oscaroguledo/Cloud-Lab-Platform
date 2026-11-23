@@ -5,15 +5,15 @@ import uuid
 from fastapi import Request
 from starlette.background import BackgroundTask
 
-from app.core import auth
-from app.core.api.dependencies import get_request_context
-from app.core.api.exceptions import APIException, MissingPermission, api_exception_handler
-from app.core.database.isolation import scope_to
-from app.core.logging import get_structured_logger
-from app.modules.identity import errors
-from app.modules.identity.audit import Action, audit
-from app.modules.identity.models import User
-from app.modules.identity.notifier import ACCOUNT_LOCKED
+from core import auth
+from core.api.dependencies import get_request_context
+from core.api.exceptions import APIException, MissingPermission, api_exception_handler
+from core.database.isolation import scope_to
+from core.logging import get_structured_logger
+from modules.identity import errors
+from modules.identity.audit import Action, audit
+from modules.identity.models import User
+from modules.identity.notifier import ACCOUNT_LOCKED
 
 logger = get_structured_logger(__name__)
 
@@ -69,7 +69,6 @@ async def locked_handler(request: Request, exc: errors.AccountLocked):
         request.app.state.notifier.send,
         ACCOUNT_LOCKED,
         to=user.email,
-        language=user.language,
         first_name=user.first_name,
         minutes=request.app.state.settings.login_lockout_minutes,
     )

@@ -17,8 +17,8 @@ from sqlalchemy import (
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.core.database.engine import GUID, UTCDateTime, uuid7
-from app.modules.identity.models.base import CHAR_LENGTH, Base, ref, table_args
+from core.database.engine import GUID, UTCDateTime, uuid7
+from modules.identity.models.base import CHAR_LENGTH, Base, ref, table_args
 
 ZERO_UUID = "00000000-0000-0000-0000-000000000000"
 MIN_LEVEL = 1  # the lowest level: a plain member

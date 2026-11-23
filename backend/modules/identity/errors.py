@@ -1,7 +1,7 @@
 """Identity errors on the shared API exceptions, each with a stable ``error_code``.
 Shared token errors are re-exported so callers import from one place."""
 
-from app.core.api.exceptions import (
+from core.api.exceptions import (
     APIException,
     AuthenticationException,
     AuthorizationException,

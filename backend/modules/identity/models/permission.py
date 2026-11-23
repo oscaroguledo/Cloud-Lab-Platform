@@ -1,7 +1,7 @@
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column
 
-from app.modules.identity.models.base import CHAR_LENGTH, Base, table_args
+from modules.identity.models.base import CHAR_LENGTH, Base, table_args
 
 
 class Permission(Base):

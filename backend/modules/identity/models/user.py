@@ -18,22 +18,20 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.core.database.engine import GUID, UTCDateTime, uuid7
-from app.core.i18n.countries import Country
-from app.core.i18n.languages import DEFAULT_LANGUAGE, Language
-from app.modules.identity.models.base import (
+from core.database.engine import GUID, UTCDateTime, uuid7
+from modules.identity.models.base import (
     CHAR_LENGTH,
     Base,
     enum_check,
     ref,
     table_args,
 )
-from app.modules.identity.models.role import Role
+from modules.identity.models.role import Role
 
 if TYPE_CHECKING:
-    from app.modules.identity.models.one_time_token import OneTimeToken
-    from app.modules.identity.models.organization import Organization
-    from app.modules.identity.models.session import UserSession
+    from modules.identity.models.token import OneTimeToken
+    from modules.identity.models.organization import Organization
+    from modules.identity.models.session import UserSession
 
 
 class AccountStatus(StrEnum):
@@ -66,11 +64,9 @@ class User(Base):
             name="users_gender_check",
         ),
         enum_check("account_status", AccountStatus, "users_account_status_check"),
-        enum_check("country", Country, "users_country_check"),
         enum_check("verification_status", VerificationStatus, "users_verification_status_check"),
         Index("idx_users_role_id", "role_id"),
         Index("idx_users_account_status", "account_status"),
-        Index("idx_users_country", "country"),
         Index("idx_users_organization_created", "organization_id", "created_at"),
     )
 
@@ -107,13 +103,10 @@ class User(Base):
     phone: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
     date_of_birth: Mapped[Optional[date]] = mapped_column(Date, nullable=True)
     gender: Mapped[Optional[str]] = mapped_column(String(20), nullable=True)
-    country: Mapped[Optional[Country]] = mapped_column(String(2), nullable=True)  # ISO 3166-1
     bio: Mapped[Optional[str]] = mapped_column(String(1000), nullable=True)
     # Free-form per-user settings (theme, notification choices...); the API keeps it small.
     preferences: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
-    # ``language`` is an ISO 639 code and ``timezone`` an IANA name, both validated by the API.
-    # Neither is a database enum: the sets are too large for a CHECK constraint.
-    language: Mapped[Language] = mapped_column(String(10), default=DEFAULT_LANGUAGE)
+    # An IANA name, validated by the API.
     timezone: Mapped[Optional[str]] = mapped_column(String(64), nullable=True)
     avatar_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
 

@@ -6,11 +6,11 @@ from typing import TYPE_CHECKING, Optional
 from sqlalchemy import Boolean, Index, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.core.database.engine import GUID, UTCDateTime, uuid7
-from app.modules.identity.models.base import CHAR_LENGTH, Base, enum_check, table_args
+from core.database.engine import GUID, UTCDateTime, uuid7
+from modules.identity.models.base import CHAR_LENGTH, Base, enum_check, table_args
 
 if TYPE_CHECKING:
-    from app.modules.identity.models.user import User
+    from modules.identity.models.user import User
 
 
 class OrganizationSize(StrEnum):

@@ -1,6 +1,6 @@
 """The audit actions identity records: the contract with whoever reads the log."""
 
-from app.core.audit import audit, entries_about, forget_later, register_actions
+from core.audit import audit, entries_about, forget_later, register_actions
 
 __all__ = ["Action", "audit", "entries_about", "forget_later"]
 

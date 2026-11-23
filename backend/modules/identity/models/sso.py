@@ -28,19 +28,21 @@ class SSOConnection(Base):
 
     __tablename__ = "sso_connections"
     __table_args__ = table_args(
-        ForeignKey(ref("users.id"), ondelete="CASCADE", name="sso_connections_user_id_fkey"),
-        Index("idx_sso_connections_provider_id", "provider", "provider_user_id"),
+        # A provider's user id is unique only within that provider.
+        Index("idx_sso_connections_provider_id", "provider", "provider_user_id", unique=True),
         Index("idx_sso_connections_user", "user_id"),
         enum_check("provider", SSOProvider, "sso_connections_provider_check"),
     )
 
     # Identification
     id: Mapped[uuid.UUID] = mapped_column(GUID(), primary_key=True, default=uuid7)
-    user_id: Mapped[uuid.UUID] = mapped_column(GUID())
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        GUID(), ForeignKey(ref("users.id"), ondelete="CASCADE")
+    )
 
     # Provider info
     provider: Mapped[SSOProvider] = mapped_column(String(50))
-    provider_user_id: Mapped[str] = mapped_column(String(255), unique=True, index=True)
+    provider_user_id: Mapped[str] = mapped_column(String(255))
     provider_email: Mapped[str] = mapped_column(String(CHAR_LENGTH))
 
     # OAuth tokens (encrypted at rest)

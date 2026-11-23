@@ -27,7 +27,6 @@ class UserUpdate(BaseSchema):
     phone: Optional[str] = Field(None, max_length=20)
     bio: Optional[str] = Field(None, max_length=1000)
     timezone: Optional[str] = Field(None, max_length=64)
-    language: Optional[str] = Field(None, max_length=10)
 
 
 class UserResponse(UUIDSchema):
@@ -42,7 +41,6 @@ class UserResponse(UUIDSchema):
     verification_status: str
     phone: Optional[str] = None
     timezone: Optional[str] = None
-    language: str
     mfa_enabled: bool
     last_login: Optional[str] = None
 

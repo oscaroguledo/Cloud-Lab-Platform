@@ -7,19 +7,19 @@ from typing import Annotated
 from fastapi import BackgroundTasks, Depends, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.api.dependencies import (
+from core.api.dependencies import (
     ContextDep,
     CurrentPrincipal,
     SessionDep,
     SettingsDep,
 )
-from app.core.api.pagination import Pagination
-from app.core.database.isolation import bypass, scope_to
-from app.modules.identity import errors
-from app.modules.identity.models import User
-from app.modules.identity.notifier import Notifier
-from app.modules.identity.services.common import ensure_can_sign_in, load_user, user_scopes
-from app.modules.identity.services.sessions import SessionService
+from core.api.pagination import Pagination
+from core.database.isolation import bypass, scope_to
+from modules.identity import errors
+from modules.identity.models import User
+from modules.identity.notifier import Notifier
+from modules.identity.services.common import ensure_can_sign_in, load_user, user_scopes
+from modules.identity.services.sessions import SessionService
 
 __all__ = [
     "ContextDep",
@@ -44,8 +44,8 @@ class BackgroundNotify:
         self._db = db
         self._queued = False
 
-    async def send(self, kind: str, *, to: str, language: str, **params: object) -> None:
-        await self._notifier.stage(self._db, kind, to=to, language=language, **params)
+    async def send(self, kind: str, *, to: str, **params: object) -> None:
+        await self._notifier.stage(self._db, kind, to=to, **params)
         if not self._queued:  # one send round per request, once its transaction is committed
             self._background.add_task(self._notifier.deliver_due)
             self._queued = True
