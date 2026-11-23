@@ -1,14 +1,36 @@
-annotated-doc==0.0.7
-annotated-types==0.8.0
-anyio==4.16.0
-click==8.5.1
+# Core
 fastapi==0.165.0
-h11==0.16.0
-idna==3.20
-opentelemetry-api==1.45.2
-pydantic==2.14.4
-pydantic_core==2.50.5
-starlette==1.10.0
-typing-inspection==0.4.5
-typing_extensions==4.16.0
 uvicorn==0.54.0
+starlette==1.10.0
+pydantic==2.14.4
+pydantic-settings==2.1.0
+
+# Database
+sqlalchemy==2.0.23
+asyncpg==0.29.0
+alembic==1.13.1
+
+# Authentication & Security
+bcrypt==4.1.2
+cryptography==41.0.7
+python-jose[cryptography]==3.3.0
+PyJWT==2.8.1
+
+# HTTP & OAuth
+httpx==0.26.0
+requests==2.31.0
+
+# Caching & Rate Limiting
+redis==5.0.1
+
+# Utilities
+python-dotenv==1.0.0
+pydantic-core==2.50.5
+
+# Type hints
+annotated-types==0.8.0
+typing-extensions==4.16.0
+typing-inspection==0.4.5
+
+# Dev/Observability
+opentelemetry-api==1.45.2
