@@ -17,8 +17,8 @@ import jwt
 from cryptography.fernet import Fernet
 from cryptography.fernet import InvalidToken as UnreadableSecret
 
-from app.core.api.exceptions import InvalidToken
-from app.core.config import Settings
+from core.api.exceptions import InvalidToken
+from core.config import Settings
 
 
 class PasswordService:
