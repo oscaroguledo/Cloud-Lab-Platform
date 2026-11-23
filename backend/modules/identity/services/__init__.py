@@ -1,5 +1,6 @@
 """Identity services: business logic layer."""
 
+from modules.identity.services.auth import AuthService
 from modules.identity.services.base import BaseService
 from modules.identity.services.organization import OrganizationService
 from modules.identity.services.permission import PermissionService
@@ -10,6 +11,7 @@ from modules.identity.services.user import UserService
 
 __all__ = [
     "BaseService",
+    "AuthService",
     "UserService",
     "OrganizationService",
     "RoleService",
