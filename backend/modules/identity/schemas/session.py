@@ -1,6 +1,7 @@
 """Session request/response schemas."""
 
 import uuid
+from datetime import datetime
 from typing import Optional
 
 from pydantic import Field
@@ -55,3 +56,13 @@ class SessionLogoutRequest(BaseSchema):
     """Request to logout (revoke current session)."""
 
     all_sessions: bool = Field(False, description="Logout all sessions if True")
+
+
+class SessionOut(BaseSchema):
+    id: uuid.UUID
+    current: bool  # the session making this request
+    ip: str | None
+    user_agent: str | None
+    created_at: datetime
+    last_used_at: datetime
+    expires_at: datetime

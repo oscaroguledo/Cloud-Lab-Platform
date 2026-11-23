@@ -16,6 +16,7 @@ from modules.identity.schemas.auth import (
     PasswordResetRequestSchema,
     RefreshTokenRequest,
     RefreshTokenResponse,
+    TokenPair,
 )
 from modules.identity.schemas.base import BaseSchema, PaginatedResponse
 from modules.identity.schemas.organization import (
@@ -33,6 +34,7 @@ from modules.identity.schemas.session import (
     SessionCreate,
     SessionListResponse,
     SessionLogoutRequest,
+    SessionOut,
     SessionResponse,
     SessionRevokeRequest,
     SessionUpdate,
@@ -64,6 +66,7 @@ __all__ = [
     "MFADisableRequest",
     "RefreshTokenRequest",
     "RefreshTokenResponse",
+    "TokenPair",
     "LogoutRequest",
     "PasswordChangeRequest",
     "PasswordResetRequestSchema",
@@ -102,6 +105,7 @@ __all__ = [
     "SessionListResponse",
     "SessionRevokeRequest",
     "SessionLogoutRequest",
+    "SessionOut",
     # Token
     "OneTimeTokenCreate",
     "OneTimeTokenResponse",

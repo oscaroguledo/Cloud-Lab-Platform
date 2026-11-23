@@ -142,3 +142,9 @@ class EmailVerificationResendRequest(BaseSchema):
     """Request to resend email verification."""
 
     email: EmailStr
+
+
+class TokenPair(BaseSchema):
+    access_token: str
+    refresh_token: str
+    expires_in: int  # access token lifetime in seconds
