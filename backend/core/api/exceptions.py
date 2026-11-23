@@ -10,8 +10,8 @@ from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.core.api.response import Response
-from app.core.logging import get_structured_logger
+from core.api.response import Response
+from core.logging import get_structured_logger
 
 logger = get_structured_logger(__name__)
 
